@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Valentine Proposal 💖</title>
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        h1 {
+            color: #ff3366;
+            margin-bottom: 10px;
+        }
+
+        #message {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+            min-height: 25px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #yesBtn {
+            background-color: #ff3366;
+            color: white;
+            margin-right: 15px;
+        }
+
+        #noBtn {
+            background-color: #ddd;
+            color: #333;
+        }
+
+        /* ❤️ Floating hearts */
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            animation: floatUp 6s linear forwards;
+            opacity: 0.8;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.8);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container" id="mainBox">
+    <h1>I love you ❤️<br>Will you be my Valentine?</h1>
+    <div id="message"></div>
+    <button id="yesBtn" onclick="yesClicked()">Yes</button>
+    <button id="noBtn" onclick="noClicked()">No</button>
+</div>
+
+<script>
+    let yesSize = 18;
+    let noClicks = 0;
+
+    const messages = [
+        "No mat press karna 😤",
+        "Mana kiya hai no press karne se 😠",
+        "Please na no mat press karo 🥺",
+        "Baby please na maan jao ❤️",
+        "Soch lo baby 🤔",
+        "Baby please na soch samajh kar press karo 🙏",
+        "Ekbaar yes press karke dekho 😘",
+        "Maan jao na 😭",
+        "Ekbaar toh yes press kardo 🥹"
+    ];
+
+    function noClicked() {
+        noClicks++;
+        const messageBox = document.getElementById("message");
+
+        if (noClicks <= 9) {
+            messageBox.innerText = messages[noClicks - 1];
+        } else {
+            messageBox.innerText = "Please press Yes ❤️";
+        }
+
+        yesSize += 10;
+        const yesBtn = document.getElementById("yesBtn");
+        yesBtn.style.fontSize = yesSize + "px";
+        yesBtn.style.padding =
+            (12 + yesSize / 4) + "px " + (25 + yesSize / 2) + "px";
+    }
+
+    function yesClicked() {
+        document.getElementById("mainBox").innerHTML = `
+            <h1 style="font-size:48px; color:#ff3366;">
+                Yayyy! 💖😍<br>
+                I knew you’d say YES ❤️<br>
+		I love you so much baby❤️
+            </h1>
+        `;
+    }
+
+    /* ❤️ Heart generator */
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+        heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+    }
+
+    setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
